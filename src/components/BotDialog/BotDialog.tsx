@@ -3,7 +3,6 @@ import {
 	Dialog,
 	DialogTrigger,
 	DialogContent,
-	DialogDescription,
 	DialogHeading,
 	DialogClose,
 } from './Dialog';
@@ -12,7 +11,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { Button, Typography } from '@mui/material';
 import FlowBuilder from '../FlowBuilder';
 import NodeForm from '../NodeForm';
-
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import NodeBtn from '../NodeBtn';
@@ -81,17 +79,17 @@ const BotMainActions = styled.div`
 `;
 
 const BotDialog = () => {
-	const reactFlowWrapper = useRef(null);
+	const reactFlowWrapper = useRef<HTMLDivElement>(null);
 
 	const [open, setOpen] = useState(true);
 	const [botName, setBotName] = useState('Bot Name');
-	const [nodes, setNodes, onNodesChange] = useNodesState<Node[]>([]);
+	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 	const [edges, setEdges, onEdgesChange] = useEdgesState<Edge[]>([]);
 	const [openForm, setOpenForm] = useState({
 		open: false,
 		title: '',
 	});
-	const [reactFlowInstance, setReactFlowInstance] = useState(null);
+	const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
 
 	const onDragStart = (event: any, label: string) => {
 		event.dataTransfer.setData('application/reactflow', label);
@@ -100,7 +98,7 @@ const BotDialog = () => {
 
 	const onConnect = useCallback(
 		(params: any) => setEdges((eds) => addEdge(params, eds)),
-		[]
+		[setEdges]
 	);
 
 	const onDragOver = useCallback((event: any) => {
@@ -138,7 +136,7 @@ const BotDialog = () => {
 				setNodes((nds) => nds.concat(newNode));
 			}
 		},
-		[reactFlowInstance]
+		[reactFlowInstance, setNodes]
 	);
 
 	return (
@@ -172,7 +170,6 @@ const BotDialog = () => {
 								<NodeBtn
 									label="On message"
 									onDragStart={(event: any) => onDragStart(event, 'On message')}
-									draggable
 								/>
 								<Typography
 									variant="h6"
@@ -186,21 +183,18 @@ const BotDialog = () => {
 									onDragStart={(event: any) =>
 										onDragStart(event, 'Send message')
 									}
-									draggable
 								/>
 								<NodeBtn
 									label="Send interactive message"
 									onDragStart={(event: any) =>
 										onDragStart(event, 'Send interactive message')
 									}
-									draggable
 								/>
 								<NodeBtn
 									label="Send template"
 									onDragStart={(event: any) =>
 										onDragStart(event, 'Send template')
 									}
-									draggable
 								/>
 							</NodesList>
 						</div>

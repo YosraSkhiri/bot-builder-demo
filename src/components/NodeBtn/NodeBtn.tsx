@@ -3,7 +3,7 @@ import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 
 interface NodeBtnProps {
 	label: string;
-  onDragStart: () => void,
+  onDragStart: (e: any) => void,
 }
 
 const Button = styled.button`

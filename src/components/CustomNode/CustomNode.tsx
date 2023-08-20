@@ -5,6 +5,7 @@ type NodeData = {
 	label: string;
 	value: number;
   id: string,
+  onClick: (e: any, {}) => {}
 };
 
 type CustomNode = Node<NodeData>;

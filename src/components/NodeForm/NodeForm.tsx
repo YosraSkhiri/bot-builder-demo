@@ -9,6 +9,10 @@ import {
 } from '@mui/material';
 import styled from 'styled-components';
 
+interface NodeFormProps {
+  title: string,
+}
+
 const FormWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -17,7 +21,7 @@ const FormWrapper = styled.div`
 	height: 100%;
 `;
 
-const NodeForm = ({ title }) => {
+const NodeForm = ({ title }: NodeFormProps) => {
 	return (
 		<div>
       <Typography variant="h5" >{title}</Typography>

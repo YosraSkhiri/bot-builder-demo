@@ -11,6 +11,7 @@ import CustomNode from '../CustomNode'
 interface FlowBuilderProps {
   nodes: Node[],
   edges: Edge[],
+  [key: string]: any,
 }
 
 const FlowBuilder = forwardRef<HTMLDivElement, FlowBuilderProps>(({
